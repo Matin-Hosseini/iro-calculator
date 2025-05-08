@@ -1,0 +1,190 @@
+@import "./modules/boilerplate.css";
+@import "./modules/loan-calculator.css";
+
+.loan-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.condition-table-wrapper {
+  backdrop-filter: blur(7px);
+
+  border-radius: 0.8rem;
+
+  overflow: hidden;
+}
+
+.condition-table-body {
+  /* overflow: hidden;
+  background-color: rgba(255, 0, 0, 0.144);
+  box-shadow: 0 0.4rem 0.8rem #0005;
+  border-radius: 0.8rem; */
+
+  max-height: calc(20% - 1.6rem);
+  background-color: #fffb;
+
+  margin: auto;
+  border-radius: 0.6rem;
+
+  overflow: auto;
+  overflow: overlay;
+}
+
+.condition-table-body::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.condition-table-body::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: #0004;
+  visibility: hidden;
+}
+
+.condition-table-body:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+.condition-table {
+  width: 100%;
+  font-size: 0.8rem;
+  box-shadow: 0 0.4rem 0.8rem #0005;
+  /* border: 1px solid black; */
+}
+
+.condition-table tr:not(:last-child) {
+  border-bottom: 1px solid #fff;
+}
+
+.condition-table,
+.condition-table th,
+.condition-table td {
+  padding: 1rem;
+  border-collapse: collapse;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.condition-table thead th {
+  position: sticky;
+  top: 0;
+  right: 0;
+  background-color: #e2e8f0;
+  color: #020617;
+  cursor: pointer;
+}
+
+.condition-table tbody tr:nth-child(even) {
+  background-color: #0000000b;
+}
+
+.condition-table tbody tr {
+  --delay: 0.1s;
+  transition: 0.5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+tbody tr:hover {
+  background-color: #fff6 !important;
+}
+
+.condition-table tbody tr .withoutGuarantor,
+.condition-table tbody tr .withGuarantor {
+  padding: 0.2rem 0.4rem;
+  border-radius: 10rem;
+  background-color: #f0fdf4;
+  color: #15803d;
+  white-space: nowrap;
+}
+
+.condition-table tbody tr .withGuarantor {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.download-pdf {
+  padding: 0.5rem 1.5rem;
+  background-color: #ede9fe;
+  color: #6d28d9;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.download-pdf:disabled {
+  opacity: 0.5;
+}
+
+.download-pdf:not(:disabled):hover {
+  background-color: #f5f3ff;
+}
+
+.condition-name p {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  border-radius: 0.5rem;
+}
+
+/* installments starts */
+
+.installments__conditions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.installments__conditions button {
+  background-color: #f9fafb;
+  color: #374151;
+  border: 1px solid #374151;
+  padding: 0.1rem 0.8rem;
+  border-radius: 0.3rem;
+}
+
+.installments__conditions button.active {
+  color: #6d28d9;
+  border-color: #6d28d9;
+  background-color: #ede9fe;
+}
+
+.installments__info {
+  background-color: #eff6ff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: #1d4ed8;
+  margin-bottom: 1rem;
+}
+.installments__info-item > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.installments__info-item > div:not(:last-child) {
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #1d4ed8;
+}
+
+.installments-calculate-btn {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 0.6rem 0;
+  width: 100%;
+  border-radius: 0.5rem;
+  transition: 0.2s all ease-in-out;
+}
+
+.installments-calculate-btn:hover {
+  background-color: #1d4ed8;
+}
+/* installments ends */

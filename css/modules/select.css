@@ -1,0 +1,80 @@
+.select-wrapper {
+  margin-bottom: 20rem;
+}
+
+.select {
+  max-width: 200px;
+  width: 100%;
+  position: relative;
+  border-radius: 0.5rem;
+  transition: 0.2s all ease-in-out;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.select:hover,
+.select.open {
+  background-color: #f9fafb;
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+
+.select-toggle-icon {
+  width: 1rem;
+  color: #818cf8;
+}
+
+.select-menu {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  top: 120%;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.select-menu > div {
+  border-radius: 0.7rem;
+  background-color: #fff;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.select.open .select-menu {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+}
+
+.select-menu .bank-item {
+  border-radius: 0.4rem;
+}
+
+.select-menu .bank-item:hover,
+.select-menu li.selected-item .bank-item {
+  background-color: #c4b5fd;
+  color: White;
+}
+
+.select-menu li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd6fe;
+}
+
+.select-menu li:first-child {
+  padding-top: 0;
+}
+.select-menu li:last-child {
+  border: 0;
+  padding-bottom: 0;
+}

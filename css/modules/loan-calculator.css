@@ -1,0 +1,222 @@
+/* loan calculator starts */
+.loan-wrapper {
+  background-color: var(--main-color-one);
+  padding: 6rem 0;
+}
+
+.loan-header {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+}
+
+.loan-header > * {
+  width: 100%;
+}
+
+.loan {
+  margin: auto;
+}
+
+.loan-header h3 {
+  font-size: 1rem !important;
+}
+
+.price-input {
+  direction: ltr;
+  padding: 0.3rem 0.5rem;
+  outline: 0;
+  border-radius: 0.3rem;
+  border: 1px solid var(--gray);
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+.price-input:focus {
+  border-color: var(--main-color-one);
+}
+
+.price-input::placeholder {
+  direction: rtl;
+  text-align: right;
+}
+
+.loan-header span {
+  color: var(--green);
+  font-size: 1.7rem;
+}
+
+.loan-installments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.loan-installments button {
+  border-radius: 0.5rem;
+  border: 1px solid #4b5563;
+  background-color: #f9fafb;
+  color: #4b5563;
+  padding: 0.2rem 1rem;
+  white-space: nowrap;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: var(--main-color-one);
+  color: #fff;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin: 0;
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 1rem;
+}
+
+.loan-installments button.active {
+  color: #8b5cf6;
+  border-color: #8b5cf6;
+  background-color: #f5f3ff;
+}
+
+/* .loan-header #loan-price {
+} */
+
+.loan-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loan-interest {
+  background-color: var(--main-color-bg);
+  color: var(--main-color-one);
+  border-radius: 10rem;
+  padding: 0.4rem 1rem;
+  display: block;
+}
+
+.loan-details {
+  background-color: #fefce8;
+  color: #ca8a04;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+.loan-details > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--main-color-one);
+}
+.loan-details > div:last-child {
+  padding: 0;
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
+.loan-details > div .price {
+  font-size: 0.9rem;
+}
+
+@media (min-width: 576px) {
+  .loan-details > div .price {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .loan-details {
+    font-size: 0.8rem;
+  }
+}
+
+.support-btn {
+  background-color: var(--main-color-one);
+  color: white;
+  width: 100%;
+  padding: 0.6rem 0;
+  border-radius: 0.5rem;
+}
+
+.range-input {
+  --c: var(--main-color-one); /* active color */
+  --g: 8px; /* the gap */
+  --l: 3px; /* line thickness*/
+  --thumb-size: 25px; /* thumb size*/
+
+  width: 100%;
+  height: var(--thumb-size); /* needed for Firefox*/
+  --_c: color-mix(in srgb, var(--c), #000 var(--p, 0%));
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 10rem;
+}
+.range-input:focus-visible,
+.range-input:hover {
+  --p: 25%;
+}
+.range-input:active,
+.range-input:focus-visible {
+  --_b: var(--thumb-size);
+}
+/* chromium */
+.range-input[type="range" i]::-webkit-slider-thumb {
+  height: var(--thumb-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 0 0 0 var(--_b, var(--l)) inset var(--_c);
+  border-image: linear-gradient(90deg, var(--gray) 50%, var(--main-color-one) 0)
+    0 1 / calc(50% - var(--l) / 2) 100vw/0 calc(100vw + var(--g));
+  -webkit-appearance: none;
+  appearance: none;
+  transition: 0.3s;
+}
+/* Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  background: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 var(--_b, var(--l)) inset var(--_c);
+  border-image: linear-gradient(90deg, gray 50%, orange 0) 0 1 /
+    calc(50% - var(--l) / 2) 100vw/0 calc(100vw + var(--g));
+  -moz-appearance: none;
+  appearance: none;
+  transition: 0.3s;
+}
+
+/* bank select box starts */
+.bank-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.1s all ease-in;
+}
+
+.bank-img {
+  width: 30px;
+}
+/* bank select box ends */
+
+/* loan calculator ends */

@@ -1,0 +1,98 @@
+:root {
+  --main-color-one: #eeb346;
+  --main-color-bg-hover: #eeb34664;
+  --main-color-bg: #eeb3461e;
+  --green: #017040;
+  --gray: #949494;
+  --red: #dc2626;
+}
+
+.btn {
+  font-size: 0.9rem !important;
+}
+
+.btn-warning {
+  background-color: var(--main-color-one) !important;
+  color: #fff !important;
+}
+
+@font-face {
+  font-family: "shabnam";
+  src: url("./../../assets/fonts/shabnam/Shabnam-Medium-FD.woff2");
+}
+@font-face {
+  font-family: "mikhak";
+  src: url("./../../assets/fonts/mikhak/Mikhak-VF.ttf");
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "shabnam";
+}
+
+button {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+img {
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.link {
+  padding: 1rem 2rem;
+  border: 2px solid var(--main-color-one);
+  border-radius: 0.5rem;
+  color: var(--main-color-one);
+  flex: 1;
+  font-size: 1.3rem;
+  transition: 0.2s all ease-in-out;
+}
+.link:hover {
+  box-shadow: 0 0.5rem 1rem var(--main-color-bg) !important;
+}
+
+.link img {
+  width: 100px;
+  margin-left: 1rem;
+}
+
+@media (max-width: 400px) {
+  .link {
+    font-size: 1rem;
+  }
+  .link img {
+    width: 50px;
+  }
+}
+
+ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

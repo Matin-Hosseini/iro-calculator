@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>محاسبه گر اقساط ایران اورجینال</title>
+
+    <link rel="stylesheet" href="vendor/swiper/swiper.min.css" />
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/loan-demo.css" />
+    <link rel="stylesheet" href="css/calculator.css" />
+  </head>
+  <body>
+    <div class="container mt-3">
+      <h1 class="page-title">محاسبه گر ایران اورجینال</h1>
+      <section class="d-flex justify-content-center mb-3">
+        <div class="w-100 d-flex flex-column gap-2">
+          <div class="w-100 mb-2">
+            <label for="price-input" class="d-block text-center"
+              >مبلغ کالای درخواستی</label
+            >
+            <div class="d-flex align-items-center gap-1">
+              <input type="text" id="price-input" class="price-input w-100" />
+              <span> تومان </span>
+            </div>
+          </div>
+          <div class="w-100 mb-2">
+            <label for="custom-prepayment" class="d-block text-center"
+              >پیش پرداخت</label
+            >
+            <div class="d-flex align-items-center gap-1">
+              <input
+                type="text"
+                id="custom-prepayment"
+                class="custom-prepayment price-input w-100"
+                placeholder="در حالت های بدون پیش پرداخت خالی بگذارید"
+              />
+              <span>تومان</span>
+            </div>
+          </div>
+
+          <p class="m-0">بازه پرداخت</p>
+          <div class="installments__conditions m-0">
+            <button data-percent="25" data-period="12" class="active">
+              12 ماهه
+            </button>
+            <button data-percent="34" data-period="18">18 ماهه</button>
+            <button data-percent="34" data-period="24">24 ماهه</button>
+            <button data-percent="43" data-period="36">36 ماهه</button>
+          </div>
+
+          <button class="calculate-btn installments-calculate-btn">
+            محاسبه
+          </button>
+        </div>
+      </section>
+      <!-- <div class="col-md-6">
+          <section>
+            <div class="installments__info m-0">
+              <div class="installments__info-item">
+                <div>
+                  <span>مبلغ قسط</span>
+                  <span>0 تومان</span>
+                </div>
+                <div>
+                  <span>مبلغ وام</span>
+                  <span>0 تومان</span>
+                </div>
+
+                <div>
+                  <span>تاریخ چک 6 ماهه</span>
+                  <span>نامشخص</span>
+                </div>
+                <div>
+                  <span>مبلغ چک 6 ماهه</span>
+                  <span> 0 تومان </span>
+                </div>
+                <div>
+                  <span>بازپرداخت وام</span>
+                  <span>0 تومان</span>
+                </div>
+                <div>
+                  <div class="d-flex flex-column">
+                    <span>بازپرداخت کل</span>
+                    <span style="font-size: 0.7rem"
+                      >بازپرداخت وام + پیش پرداخت + چک 6 ماهه</span
+                    >
+                  </div>
+                  <span>0 تومان</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div> -->
+
+      <section class="installments-info">
+        <!-- <div class="custom-info-box">
+          <div class="custom-info-box__title">مبلغ تسهیلات</div>
+          <div class="custom-info-box__content">0 تومان</div>
+        </div>
+        <div class="custom-info-box">
+          <div class="custom-info-box__title">مبلغ هر قسط</div>
+          <div class="custom-info-box__content">0 تومان</div>
+        </div>
+        <div class="custom-info-box">
+          <div class="custom-info-box__title">تاریخ و مبلغ چک 6 ماهه</div>
+          <div class="custom-info-box__content">0 تومان</div>
+        </div>
+        <div class="custom-info-box">
+          <div class="custom-info-box__title">بازپرداخت تسهیلات</div>
+          <div class="custom-info-box__content">0 تومان</div>
+        </div>
+        <div class="custom-info-box">
+          <div class="custom-info-box__title">ضمانت</div>
+          <div class="custom-info-box__content">0 تومان</div>
+        </div> -->
+      </section>
+    </div>
+
+    <script src="vendor/swiper/swiper.min.js"></script>
+    <script src="vendor/SweetAlert/sweetalert.js"></script>
+    <script src="scripts/calculator.js" type="module"></script>
+  </body>
+</html>

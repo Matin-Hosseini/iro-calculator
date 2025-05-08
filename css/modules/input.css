@@ -1,0 +1,87 @@
+/* custom input starts */
+.input-wrapper:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+  
+  .text-field {
+    position: relative;
+    border: 1px solid var(--gray);
+    color: var(--gray);
+    border-radius: 0.3rem;
+    transition: 0.2s all cubic-bezier(0.25, -0.07, 0.79, 0.83);
+  }
+  
+  .text-field:has(input:focus),
+  .text-field:has(input:valid) {
+    border-color: var(--main-color-one);
+  }
+  
+  .text-field input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 0.9rem;
+    color: var(--gray);
+  }
+  
+  .text-field input:focus ~ label,
+  .text-field input:valid ~ label {
+    right: 0.7rem;
+    top: 0;
+    font-size: 0.8rem;
+    color: var(--main-color-one);
+  }
+  
+  .text-field label {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    background: #fff;
+    transition: 0.2s all cubic-bezier(0.25, -0.07, 0.79, 0.83);
+    padding: 0 0.5rem;
+  }
+  
+  .input-wrapper .helper-text {
+    color: var(--main-color-one);
+    font-size: 0.8rem;
+    padding-right: 0.5rem;
+    display: none;
+    visibility: hidden;
+  }
+  
+  /* handling important input starts */
+  .input-wrapper:has(input.important) label {
+    padding-left: 1rem;
+  }
+  .input-wrapper:has(input.important) label::after {
+    position: absolute;
+    content: "*";
+    left: 0.2rem;
+    top: 50%;
+    transform: translateY(-40%);
+  }
+  /* handling important input ends */
+  
+  /* handling errors starts */
+  .input-wrapper:has(input.error) {
+    margin-bottom: 0.6rem;
+  }
+  .text-field:has(input.error) {
+    border-color: var(--red);
+  }
+  
+  .text-field:has(input.error) label {
+    color: var(--red);
+  }
+  .text-field:has(input.error) ~ .helper-text {
+    color: var(--red);
+    visibility: visible;
+    display: block;
+  }
+  /* handling errors ends */
+  
+  /* custom input ends */

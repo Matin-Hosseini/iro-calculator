@@ -1,0 +1,151 @@
+@import "./modules/boilerplate.css";
+.price-swiper__container {
+  border: 1px solid var(--main-color-one);
+  max-width: 700px;
+  height: 70px;
+  padding: 0 4.5rem;
+  border-radius: 10rem;
+  margin: auto;
+}
+
+.price-swiper .swiper-wrapper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  transition: 0.2 all linear;
+  color: var(--gray);
+  cursor: pointer;
+  width: 100%;
+}
+
+.price-swiper .swiper-wrapper .swiper-slide.swiper-slide-active {
+  color: #000;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .price-swiper .swiper-wrapper .swiper-slide.swiper-slide-active {
+    font-size: 1rem;
+  }
+}
+
+.price-swiper__prev,
+.price-swiper__next {
+  position: absolute;
+  border: 1px solid var(--main-color-one);
+  background-color: var(--main-color-bg);
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  transform: translateY(-50%);
+
+  z-index: 99;
+}
+
+.price-swiper__prev .bi,
+.price-swiper__next .bi {
+  color: var(--main-color-one);
+  /* height: 16px; */
+  font-size: 1.5rem;
+  /* margin-bottom: 0.4rem; */
+}
+
+.price-swiper__prev {
+  border-radius: 2rem 10rem 10rem 2rem;
+  right: 0.5rem;
+}
+.price-swiper__next {
+  border-radius: 10rem 2rem 2rem 10rem;
+  left: 0.5rem;
+}
+
+.price-period-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.price-period {
+  border: 1px solid var(--gray);
+  padding: 0.2rem 1.5rem;
+  color: var(--gray);
+  font-size: 0.8rem;
+  border-radius: 10rem;
+}
+.price-period--active {
+  border: 1px solid var(--main-color-one);
+  background-color: var(--main-color-bg);
+  color: var(--main-color-one);
+}
+
+/* loan starts */
+.loan-item {
+  padding: 2rem;
+  border-radius: 1.5rem;
+}
+.loan-bank-img {
+  width: 50px;
+}
+.loan-bank-title {
+  font-size: 0.9rem;
+}
+.loan-interest {
+  padding: 0.3rem 1rem;
+  color: var(--main-color-one);
+  background-color: var(--main-color-bg);
+  border-radius: 10rem;
+  font-size: 0.8rem;
+}
+
+.loan-content {
+  margin: 2rem 0;
+  background-color: var(--main-color-bg);
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+.loan-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--gray);
+  padding-right: 0.6rem;
+  padding-left: 0.6rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+.loan-total-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.loan-total-price span:nth-child(1) {
+  font-size: 1.4rem;
+  color: var(--main-color-one);
+}
+.loan-total-price span:nth-child(2) {
+  font-size: 0.8rem;
+}
+
+.loan-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.confirm-btn {
+  background-color: var(--main-color-one);
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+}
+/* loan ends */
