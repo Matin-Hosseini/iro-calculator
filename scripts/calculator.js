@@ -9,8 +9,30 @@ import {
 const calculateBtn = document.querySelector(".calculate-btn");
 const productPriceInput = document.querySelector("#price-input");
 const prePaymentInput = document.querySelector("#custom-prepayment");
-const installMentsContainer = document.querySelector(".installments__info");
 const installMentsInfoWrapper = document.querySelector(".installments-info");
+const installmentsConditionsWrapper = document.querySelector(
+  ".installments__conditions"
+);
+
+const conditionMonths = [
+  { id: 1, period: 12, increasePercent: 25, checkPeriod: 13 },
+  { id: 2, period: 18, increasePercent: 34, checkPeriod: 6 },
+  { id: 3, period: 24, increasePercent: 34, checkPeriod: 6 },
+  { id: 4, period: 36, increasePercent: 43, checkPeriod: 6 },
+];
+
+installmentsConditionsWrapper.innerHTML = "";
+conditionMonths.forEach((item, index) => {
+  installmentsConditionsWrapper.insertAdjacentHTML(
+    "beforeend",
+    `
+      <button data-id="${item.id}" class="${index === 0 ? "active" : ""}">
+        ${item.period} 
+        ماهه
+      </button>  
+    `
+  );
+});
 
 const date = new Date();
 
@@ -30,7 +52,7 @@ document.querySelectorAll(".installments__conditions button").forEach((btn) => {
   });
 });
 
-calculateBtn.addEventListener("click", () => {
+const calculate = () => {
   const productPrice = getNumberSeparatedInputValue(productPriceInput);
   const prePayment = getNumberSeparatedInputValue(prePaymentInput);
 
@@ -63,72 +85,35 @@ calculateBtn.addEventListener("click", () => {
     return;
   }
 
-  const period = +document.querySelector(
+  const selectedMonth = document.querySelector(
     ".installments__conditions button.active"
-  ).dataset.period;
+  );
 
-  const periodPercent = +document.querySelector(
-    ".installments__conditions button.active"
-  ).dataset.percent;
+  const targetMonth = conditionMonths.find(
+    (item) => item.id === +selectedMonth.dataset.id
+  );
+
+  console.log(targetMonth);
 
   const priceAfterIncrease = productPrice + productPrice * 0.05;
   const priceAfterPrePayment = priceAfterIncrease - prePayment;
 
   const loanPrice =
-    priceAfterPrePayment + (priceAfterPrePayment * periodPercent) / 100;
+    priceAfterPrePayment +
+    (priceAfterPrePayment * targetMonth.increasePercent) / 100;
 
   const { monthlyPayment, totalPayment } = loanCalculation(
     loanPrice,
     23,
-    period
+    targetMonth.period
   );
 
-  const checkDate = getDate(addDays(Date.now(), 180));
+  const guaranteeCheckDate = getDate(addDays(Date.now(), 180));
   const guaranteeCheckPrice = calculateGuaranteePrice(totalPayment, "check");
 
-  // installMentsContainer.innerHTML = `
-
-  //   <div class="installments__info-item">
-  //       <div>
-  //           <span>مبلغ قسط</span>
-  //           <span>${monthlyPayment.toLocaleString()} تومان</span>
-  //       </div>
-  //       <div>
-  //           <span>مبلغ وام</span>
-  //           <span>${loanPrice.toLocaleString()} تومان</span>
-  //       </div>
-
-  //       <div>
-  //           <span>تاریخ چک 6 ماهه</span>
-  //           <span>
-  //               ${checkDate.dayWeek}
-  //               ${checkDate.year}/${checkDate.month}/${checkDate.day}
-  //           </span>
-  //       </div>
-  //       <div>
-  //           <span>مبلغ چک 6 ماهه</span>
-  //           <span>
-  //               ${monthlyPayment.toLocaleString()} تومان
-  //           </span>
-  //       </div>
-  //       <div>
-  //           <span>بازپرداخت وام</span>
-  //           <span>${totalPayment.toLocaleString()} تومان</span>
-  //       </div>
-  //       <div>
-  //           <div class="d-flex flex-column">
-  //                   <span>بازپرداخت کل</span>
-  //                   <span style="font-size: 0.7rem"
-  //                     >بازپرداخت وام + پیش پرداخت + چک 6 ماهه</span
-  //                   >
-  //                 </div>
-  //           <span>
-  //             ${(totalPayment + prePayment + monthlyPayment).toLocaleString()}
-  //             تومان
-  //           </span>
-  //       </div>
-  //   </div>
-  // `;
+  const companyCheckDate = getDate(
+    addDays(Date.now(), targetMonth.checkPeriod * 30)
+  );
 
   installMentsInfoWrapper.innerHTML = `
   <div class="custom-info-box">
@@ -139,18 +124,23 @@ calculateBtn.addEventListener("click", () => {
     <div class="custom-info-box__title">مبلغ هر قسط</div>
     <div class="custom-info-box__content">
       <div class="d-flex align-items-center justify-content-around flex-wrap gap-2">
-        <span>${period} قسط مساوی به مبلغ </span>
+        <span>${targetMonth.period} قسط مساوی به مبلغ </span>
         <span>${monthlyPayment.toLocaleString()} تومان</span>
       </div>
     </div>
   </div>
   <div class="custom-info-box">
-    <div class="custom-info-box__title">تاریخ و مبلغ چک 6 ماهه</div>
+    <div class="custom-info-box__title">تاریخ و مبلغ چک 
+      ${targetMonth.checkPeriod} 
+      ماهه
+    </div>
     <div class="custom-info-box__content">
       <div class="d-flex align-items-center justify-content-around flex-wrap gap-2">
         <span>
           یک فقره چک صیادی به  تاریخ 
-          ${checkDate.year}/${checkDate.month}/${checkDate.day} 
+          ${companyCheckDate.day}/
+          ${companyCheckDate.month}/
+          ${companyCheckDate.year}
         </span>
         <span>
           به مبلغ یک قسط معادل ${monthlyPayment.toLocaleString()} تومان
@@ -182,7 +172,9 @@ calculateBtn.addEventListener("click", () => {
       <div class="d-flex align-items-center justify-content-around flex-wrap gap-2">
         <span>
           یک فقره چک صیادی به  تاریخ 
-          ${checkDate.year}/${checkDate.month}/${checkDate.day} 
+          ${guaranteeCheckDate.day}/
+          ${guaranteeCheckDate.month}/
+          ${guaranteeCheckDate.year}
         </span>
         <span>
           به مبلغ ${guaranteeCheckPrice.toLocaleString()} تومان
@@ -191,4 +183,11 @@ calculateBtn.addEventListener("click", () => {
     </div>
   </div>
 `;
+};
+
+calculateBtn.addEventListener("click", calculate);
+document.addEventListener("keypress", (e) => {
+  if (e.code === "Enter") {
+    calculate();
+  }
 });
