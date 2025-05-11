@@ -117,10 +117,6 @@ const calculate = () => {
 
   installMentsInfoWrapper.innerHTML = `
   <div class="custom-info-box">
-    <div class="custom-info-box__title">مبلغ تسهیلات</div>
-    <div class="custom-info-box__content">${loanPrice.toLocaleString()} تومان</div>
-  </div>
-  <div class="custom-info-box">
     <div class="custom-info-box__title">مبلغ هر قسط</div>
     <div class="custom-info-box__content">
       <div class="d-flex align-items-center justify-content-around flex-wrap gap-2">
@@ -145,24 +141,6 @@ const calculate = () => {
         <span>
           به مبلغ یک قسط معادل ${monthlyPayment.toLocaleString()} تومان
         </span>
-      </div>
-    </div>
-  </div>
-  <div class="custom-info-box">
-    <div class="custom-info-box__title">بازپرداخت </div>
-    <div class="custom-info-box__content">
-      <div class="d-flex align-items-center justify-content-around flex-wrap gap-2">
-        <div class="d-flex flex-column align-items-center gap-1">
-          <span style="color: #3b82f6;">تسهیلات</span>
-          <span>${totalPayment.toLocaleString()} تومان</span>
-        </div>
-        <div class="d-flex flex-column align-items-center gap-1">
-          <span style="color: #3b82f6;">کل</span>
-          <span>
-            ${(totalPayment + prePayment + monthlyPayment).toLocaleString()}
-            تومان
-          </span>
-        </div>
       </div>
     </div>
   </div>
