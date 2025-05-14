@@ -28,6 +28,7 @@ const showPaymentMonths = (conditions, method) => {
         <button data-id="${item.id}" class="${index === 0 ? "active" : ""}">
           ${item.period} 
           ماهه
+          ${item.desc ? ` (${item.desc})` : ""}
         </button>  
         `
     );
@@ -47,27 +48,85 @@ const showPaymentMonths = (conditions, method) => {
 //funcs ends
 
 //data layer
-const conditionMonths = [
-  { id: 1, period: 12, increasePercent: 25, checkPeriod: 13 },
-  { id: 2, period: 18, increasePercent: 34, checkPeriod: 6 },
-  { id: 3, period: 24, increasePercent: 34, checkPeriod: 6 },
-  { id: 4, period: 36, increasePercent: 43, checkPeriod: 6 },
-];
-
 const conditions = {
-  check: {
+  bank: {
     months: [
-      { id: 1, period: 12, increasePercent: 25, checkPeriod: 13 },
-      { id: 2, period: 18, increasePercent: 34, checkPeriod: 6 },
-      { id: 3, period: 24, increasePercent: 34, checkPeriod: 6 },
-      { id: 4, period: 36, increasePercent: 43, checkPeriod: 6 },
+      {
+        id: 1,
+        period: 12,
+        increasePercent: 25,
+        checkPeriod: 13,
+        minPrePaymentPercent: 0,
+        loanInterestPercent: 23,
+      },
+      {
+        id: 2,
+        period: 18,
+        increasePercent: 34,
+        checkPeriod: 6,
+        minPrePaymentPercent: 0,
+        loanInterestPercent: 23,
+      },
+      {
+        id: 3,
+        period: 24,
+        increasePercent: 34,
+        checkPeriod: 6,
+        minPrePaymentPercent: 0,
+        loanInterestPercent: 23,
+      },
+      {
+        id: 4,
+        period: 36,
+        increasePercent: 43,
+        checkPeriod: 6,
+        minPrePaymentPercent: 0,
+        loanInterestPercent: 23,
+      },
+      {
+        id: 5,
+        period: 60,
+        increasePercent: 35,
+        checkPeriod: 6,
+        minPrePaymentPercent: 60,
+        loanInterestPercent: 26,
+        desc: "فقط خودرو",
+      },
     ],
   },
   promissory: {
     months: [
-      { id: 1, period: 4, increasePercent: 5.5 },
-      { id: 2, period: 8, increasePercent: 5.5 },
-      { id: 3, period: 10, increasePercent: 5.5 },
+      {
+        id: 1,
+        period: 7,
+        increasePercent: 30,
+        checkPeriod: 6,
+        minPrePaymentPercent: 40,
+        loanInterestPercent: 23,
+      },
+      {
+        id: 2,
+        period: 12,
+        increasePercent: 60,
+        checkPeriod: 13,
+        minPrePaymentPercent: 40,
+        loanInterestPercent: 23,
+      },
+      {
+        id: 3,
+        period: 18,
+        increasePercent: 90,
+        checkPeriod: 6,
+        minPrePaymentPercent: 40,
+        loanInterestPercent: 23,
+      },
+    ],
+  },
+  biMonthlyCheck: {
+    months: [
+      { id: 1, period: 4, increasePercent: 5.5, minPrePaymentPercent: 0 },
+      { id: 2, period: 8, increasePercent: 5.5, minPrePaymentPercent: 0 },
+      { id: 3, period: 10, increasePercent: 5.5, minPrePaymentPercent: 0 },
     ],
   },
 };
@@ -79,9 +138,7 @@ selectMonths.forEach((monthInput) => {
   });
 });
 
-showPaymentMonths(conditions, "check");
-
-const date = new Date();
+showPaymentMonths(conditions, "bank");
 
 separateNumberInput(productPriceInput);
 separateNumberInput(prePaymentInput);
@@ -134,8 +191,28 @@ const calculate = () => {
     (item) => item.id === +selectedMonth.dataset.id
   );
 
-  if (selectedCalculationMethod === "check") {
+  if (
+    selectedCalculationMethod === "bank" ||
+    selectedCalculationMethod === "promissory"
+  ) {
     const priceAfterIncrease = productPrice + productPrice * 0.05;
+
+    const minPrePayment =
+      (priceAfterIncrease * targetMonth.minPrePaymentPercent) / 100;
+
+    if (prePayment < minPrePayment) {
+      Swal.fire({
+        title: "خطا!",
+        text: `حداقل پیش پرداخت 
+          ${Math.ceil(minPrePayment).toLocaleString()}
+         تومان می باشد.`,
+        icon: "error",
+        confirmButtonText: "بازگشت",
+      });
+
+      return;
+    }
+
     const priceAfterPrePayment = priceAfterIncrease - prePayment;
 
     const loanPrice =
@@ -144,12 +221,17 @@ const calculate = () => {
 
     const { monthlyPayment, totalPayment } = loanCalculation(
       loanPrice,
-      23,
+      targetMonth.loanInterestPercent,
       targetMonth.period
     );
 
     const guaranteeCheckDate = getDate(addDays(Date.now(), 180));
     const guaranteeCheckPrice = calculateGuaranteePrice(totalPayment, "check");
+
+    const guaranteePromissoryPrice = calculateGuaranteePrice(
+      totalPayment,
+      "promissory"
+    );
 
     const companyCheckDate = getDate(
       addDays(Date.now(), targetMonth.checkPeriod * 30)
@@ -209,21 +291,36 @@ const calculate = () => {
       <div class="custom-info-box">
         <div class="custom-info-box__title">ضمانت</div>
         <div class="custom-info-box__content">
-          <div class="d-flex align-items-center justify-content-around flex-wrap gap-2">
-            <span>
-              یک فقره چک صیادی به  تاریخ 
-              ${guaranteeCheckDate.day}/
-              ${guaranteeCheckDate.month}/
-              ${guaranteeCheckDate.year}
-            </span>
-            <span>
-              به مبلغ ${guaranteeCheckPrice.toLocaleString()} تومان
-            </span>
-          </div>
+          ${
+            selectedCalculationMethod === "bank"
+              ? `
+                <div class="d-flex align-items-center justify-content-around flex-wrap gap-2">
+                  <span>
+                      چک صیادی به  تاریخ
+                    ${guaranteeCheckDate.day}/
+                    ${guaranteeCheckDate.month}/
+                    ${guaranteeCheckDate.year}
+                  </span>
+                  <span>
+                    به مبلغ ${guaranteeCheckPrice.toLocaleString()} تومان
+                  </span>
+              </div>
+            `
+              : ``
+          }
+
+          ${
+            selectedCalculationMethod === "promissory"
+              ? `
+              <span>سفته به مبلغ ${guaranteePromissoryPrice.toLocaleString()} تومان</span>
+            `
+              : ``
+          }
+            
         </div>
       </div>
     `;
-  } else if (selectedCalculationMethod === "promissory") {
+  } else if (selectedCalculationMethod === "biMonthlyCheck") {
     const increasePercent = targetMonth.period * targetMonth.increasePercent;
 
     const priceAfterIncrease =
@@ -268,8 +365,6 @@ const calculate = () => {
       paymentMonthPeriod
     );
 
-    console.log(installmentChecks);
-
     const guaranteeCheckPrice =
       priceAfterPrepayment + priceAfterPrepayment * 0.5;
 
@@ -309,7 +404,7 @@ const calculate = () => {
         <div class="custom-info-box__content">
           <div class="d-flex align-items-center justify-content-around flex-wrap gap-2">
             <span>
-              یک فقره چک صیادی به  تاریخ 
+             چک صیادی به  تاریخ 
               ${guaranteeCheckDate.day}/
               ${guaranteeCheckDate.month}/
               ${guaranteeCheckDate.year}

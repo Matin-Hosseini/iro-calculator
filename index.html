@@ -13,19 +13,26 @@
   <body>
     <div class="container mt-3">
       <h1 class="page-title">محاسبه گر ایران اورجینال</h1>
+      <p class="alert">
+        به منظور اعمال دقیق محاسبات پس از ایجاد تغییرات حتما گزینه محاسبه را
+        بزنید.
+      </p>
       <section class="d-flex justify-content-center mb-3">
         <div class="w-100 d-flex flex-column gap-2">
-          <div class="select" tabindex="1">
+          <div class="select payment-options" tabindex="1">
+            <p class="fs-5 m-0 text-center">نحوه خرید</p>
             <div>
               <input
                 class="selectopt"
                 name="test"
                 type="radio"
-                id="check"
-                value="check"
+                id="bank"
+                value="bank"
                 checked
               />
-              <label for="check" class="option">خرید با تسهیلات</label>
+              <label for="bank" class="option"
+                >تسهیلات بانکی ضمانت چک صیادی</label
+              >
             </div>
             <div>
               <input
@@ -36,7 +43,20 @@
                 value="promissory"
               />
               <label for="promissory" class="option"
-                >خرید با شرایط ایران اورجینال</label
+                >تسهیلات بانکی ضمانت سفته</label
+              >
+            </div>
+            <div>
+              <input
+                class="selectopt"
+                name="test"
+                type="radio"
+                id="biMonthlyCheck"
+                value="biMonthlyCheck"
+              />
+
+              <label for="biMonthlyCheck" class="option"
+                >هر دو ماه یک چک صیادی</label
               >
             </div>
           </div>
@@ -65,15 +85,8 @@
             </div>
           </div>
 
-          <p class="m-0">بازه پرداخت</p>
-          <div class="installments__conditions m-0">
-            <button data-percent="25" data-period="12" class="active">
-              12 ماهه
-            </button>
-            <button data-percent="34" data-period="18">18 ماهه</button>
-            <button data-percent="34" data-period="24">24 ماهه</button>
-            <button data-percent="43" data-period="36">36 ماهه</button>
-          </div>
+          <p class="m-0 text-center">بازه پرداخت</p>
+          <div class="installments__conditions m-0 mb-2"></div>
 
           <button class="calculate-btn installments-calculate-btn">
             محاسبه

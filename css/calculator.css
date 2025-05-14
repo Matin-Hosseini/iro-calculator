@@ -10,6 +10,7 @@
 
 body {
   font-family: "dana";
+  font-size: 0.9rem;
 }
 
 .page-title {
@@ -37,4 +38,18 @@ body {
   padding: 1rem 0.4rem;
   font-size: 0.9rem;
   color: #475569;
+}
+
+.alert {
+  margin: 0 !important;
+  background-color: #dbeafe;
+  color: #2563eb;
+  border-radius: 0.5rem;
+  padding: 0.5rem !important;
+  font-size: 0.9rem;
+}
+
+.payment-options {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
 }
